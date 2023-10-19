@@ -1,0 +1,41 @@
+/*
+// Definition for a Node.
+public class Node {
+    public int val;
+    public Node next;
+    public Node random;
+    
+    public Node(int _val) {
+        val = _val;
+        next = null;
+        random = null;
+    }
+}
+*/
+
+public class Solution {
+    public Node CopyRandomList(Node head) {
+            var nodes_map  = new Dictionary <Node, Node>();
+            for( var current = head; current!= null; current=current.next){
+            var node_copy = nodes_creation_or_assigning(nodes_map, current);
+            if(current.next != null)
+                node_copy.next = nodes_creation_or_assigning(nodes_map, current.next);
+            if(current.random != null)
+                node_copy.random = nodes_creation_or_assigning(nodes_map, current.random);
+            }
+                return head == null? null : nodes_map[head];
+    }
+private Node nodes_creation_or_assigning( Dictionary <Node, Node> nodes_map, Node key){
+            if(!nodes_map.ContainsKey(key)){
+                nodes_map.Add(key ,new Node(key.val));
+            }
+            return nodes_map[key];
+        }
+    
+}
+/*
+deep copy
+copy list with random pointers 
+leetcode
+c#
+*/
